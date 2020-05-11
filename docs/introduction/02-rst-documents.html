@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>reStructuredText Documents &#8212; rst-literate 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Literate Programming and reStructuredText" href="01-concepts.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="restructuredtext-documents">
+<h1>reStructuredText Documents<a class="headerlink" href="#restructuredtext-documents" title="Permalink to this headline">¶</a></h1>
+<p>My course notes are a collection of individual lectures, each a single <strong>.rst</strong>
+file. The course is organized in sections, which are managed together ion a
+directory named after the section topic. At the root of the course repository,
+I place the <a class="reference external" href="http://sphinx-doc.org/">sphinx</a> configuration file and the top level <strong>index.rst</strong> file
+containing the table of contents for the complete course.</p>
+<p>Rather than listing every lecture file title in the table of contents, I use
+the <a class="reference external" href="http://sphinx-doc.org/">sphinx</a> <strong>glob</strong> feature that simply processes all files found in a
+subdirectory. To get those files in something other than alphabetical order, I
+name the lectures with leading two-digit numbers, so the files end up being
+processed in the correct order.</p>
+<p>To get this project started, we need to build a piece of code that will do
+something similar.</p>
+<div class="section" id="step-1-set-up-the-project">
+<h2>Step 1: Set up the project<a class="headerlink" href="#step-1-set-up-the-project" title="Permalink to this headline">¶</a></h2>
+<p>Like all good projects, we need to create a home for the project, and get it
+under <a class="reference external" href="https://git-scm.com/">Git</a> control. We also need to get it on <a class="reference external" href="https://github.com/">GitHub</a> so we have a safe “master”
+copy in case our local development machine explodes! (Believe me, I have had
+major failures using some unnamed vendor machines!)</p>
+<p>Here is my start for this project:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> _projects
+$ mkdir -p rst_literate/<span class="o">{</span>rst/_static,docs,src.tests<span class="o">}</span>
+</pre></div>
+</div>
+<p>Now, we can initialize the project so <a class="reference external" href="https://git-scm.com/">Git</a> can manage it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> rst_literate
+$ git init
+</pre></div>
+</div>
+<p>We need a <strong>.gitignore</strong> file to keep cruft out of our remote repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mac</span>
+<span class="o">.</span><span class="n">DS_Store</span>
+
+<span class="c1"># Vim</span>
+<span class="o">*~</span>
+<span class="o">.*.</span><span class="n">sw</span><span class="o">*</span>
+
+<span class="c1">#Python</span>
+<span class="n">__pycache__</span>
+<span class="n">_venv</span><span class="o">/</span>
+<span class="o">*.</span><span class="n">py</span><span class="p">[</span><span class="n">cod</span><span class="p">]</span>
+
+<span class="c1"># Sphinx</span>
+<span class="n">rst</span><span class="o">/</span><span class="n">_build</span>
+
+
+</pre></div>
+</div>
+<p>Ideally, we add a <strong>README.rst</strong> to the project, so visitors to the project on
+<a class="reference external" href="https://github.com/">GitHub</a> will see some information about the project. Here is a basic start on
+this file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rst</span><span class="o">-</span><span class="n">literate</span><span class="p">:</span> <span class="n">Enhanced</span> <span class="n">reStructuredText</span> <span class="n">Processor</span>
+<span class="c1">#################################################</span>
+<span class="p">:</span><span class="n">Author</span><span class="p">:</span> <span class="n">Roie</span> <span class="n">R</span><span class="o">.</span> <span class="n">Black</span>
+<span class="p">:</span><span class="n">Date</span><span class="p">:</span> <span class="n">May</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2020</span>
+<span class="p">:</span><span class="n">Email</span><span class="p">:</span> <span class="n">roie</span><span class="o">.</span><span class="n">black</span><span class="nd">@gmail</span><span class="o">.</span><span class="n">com</span>
+<span class="p">:</span><span class="n">Documentation</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">rblack42</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">rst_literate</span>
+</pre></div>
+</div>
+<p>Now, we can get the project on <a class="reference external" href="https://github.com/">github</a>. Assuming you have an account there,
+create a new empty repository with the project name. I will show the required
+commands using my <a class="reference external" href="https://github.com/">GitHub</a> user name, which is <strong>rblack42</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git remote add origin https://github.com/rblack42/rst_literate.git
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">rst-literate</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01-concepts.html">Literate Programming and reStructuredText</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">reStructuredText Documents</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#step-1-set-up-the-project">Step 1: Set up the project</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="01-concepts.html" title="previous chapter">Literate Programming and reStructuredText</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Roie R. Black.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/introduction/02-rst-documents.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
