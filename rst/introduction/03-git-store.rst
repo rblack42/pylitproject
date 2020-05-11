@@ -1,0 +1,68 @@
+The Git Store
+#############
+
+..  include::   /header.inc
+
+Git_ stores everything needed to manage a project in a hidden **.git** subdirectory in
+the root directory of your project. Normally, you never pay any attention to what is in that folder. However, we will be using a variant of the Git store for our literate programming work, so let's look inside a bit deeper.
+
+Git Blobs
+*********
+
+Any time Git_ needs to store a version of a file, it runs that file's content
+through a hash function to calculate a unique 40 character code for that
+content. Git_ then breaks that hash code into twp parts: The first two
+characters name a subdirectory under **.git/objects**, and the remaining 38
+characters of the code become the file name for that content in the indicated
+subdirectory. The actual content is stored in a compressed file.
+
+Hers is example code that will generate the 40 character hash code for an input file:
+
+..  code-block::    python
+
+    import sys
+    import hashlib
+
+    BUF_SIZE = 65536
+
+    sha1 = hashlib.sha1()
+
+    with open(sys.argv[1], 'rb') as f:
+        while True:
+            data = f.read(BUF_SIZE)
+            if not data:
+                break
+            sha1.update(data)
+
+    print("SHA1: {0}".format(sha1.hexdigest())
+
+Handling Indentation
+
+..  code-block:: pythpn
+
+    def getIndentationCount(spaces):
+        count = 0
+        for ch in spaces:
+            if ch == '\t':
+                count += 8 - (count % 8)
+            else:
+                count += 1
+        return count 
+
+Checking for new indent of dedent
+
+..  code-block:: python
+
+    indent = self.getIndentationCount(spaces)
+    previous = self.indents[-1] if self.indents else 0
+    self.emitToken(self.commonToken(self.NEWLINE, newLine, indent=indent))
+    if indent == previous:
+        self.skip()
+    elif indent > previous:
+        self.indents.append(indent)
+        self.emitToken(self.commonToken(LanguageParser.INDENT, spaces))
+    else:
+        while self.indents and self.indents[-1] > indent:
+            self.emitToken(self.createDedent())
+            self.indents.pop()
+

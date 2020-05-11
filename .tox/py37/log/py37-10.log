@@ -1,0 +1,16 @@
+action: py37, msg: installpkg
+cwd: /Users/rblack/_projects/pylitproject
+cmd: /Users/rblack/_projects/pylitproject/.tox/py37/bin/python -m pip install --no-deps -U .tox/.tmp/package/1/pylitproject-0.0.0.zip
+Processing ./.tox/.tmp/package/1/pylitproject-0.0.0.zip
+Building wheels for collected packages: pylitproject
+  Building wheel for pylitproject (setup.py): started
+  Building wheel for pylitproject (setup.py): finished with status 'done'
+  Created wheel for pylitproject: filename=pylitproject-0.0.0-py2.py3-none-any.whl size=2326 sha256=48b0642664d6e37db1af756eccd2853c6973dd7ddd3fbe2d7278476f88060df7
+  Stored in directory: /Users/rblack/Library/Caches/pip/wheels/d8/ba/65/1e9357f26dbd188ecbb5c93502b9b890824a3c7edde61f5d26
+Successfully built pylitproject
+Installing collected packages: pylitproject
+  Attempting uninstall: pylitproject
+    Found existing installation: pylitproject 0.0.0
+    Uninstalling pylitproject-0.0.0:
+      Successfully uninstalled pylitproject-0.0.0
+Successfully installed pylitproject-0.0.0

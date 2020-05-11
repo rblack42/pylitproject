@@ -1,0 +1,7 @@
+action: py37, msg: getenv
+cwd: /Users/rblack/_projects/pylitproject/.tox
+cmd: /Users/rblack/_projects/pylitproject/_venv/bin/python3 -m virtualenv --no-download --python /Users/rblack/_projects/pylitproject/_venv/bin/python3 py37
+created virtual environment CPython3.7.5.final.0-64 in 251ms
+  creator CPython3Posix(dest=/Users/rblack/_projects/pylitproject/.tox/py37, clear=False, global=False)
+  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/Users/rblack/Library/Application Support/virtualenv/seed-app-data/v1.0.1)
+  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator

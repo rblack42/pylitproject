@@ -1,0 +1,5 @@
+action: py37, msg: envreport
+cwd: /Users/rblack/_projects/pylitproject
+cmd: /Users/rblack/_projects/pylitproject/.tox/py37/bin/python -m pip freeze
+nose==1.3.7
+pylitproject @ file:///Users/rblack/_projects/pylitproject/.tox/.tmp/package/1/pylitproject-0.0.0.zip

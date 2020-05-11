@@ -1,0 +1,6 @@
+__title__ = 'pylitproject'
+__summary__ = 'Literate Programming with reStructuredText'
+__url__ = 'https://github.com/rblack42/pylitproject'
+__author__ = 'Roie R. Black'
+__email__ = 'roie.black@gmail.com'
+__license__ = 'BSD 3-Clause'

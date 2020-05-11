@@ -1,0 +1,8 @@
+action: lint, msg: envreport
+cwd: /Users/rblack/_projects/pylitproject
+cmd: /Users/rblack/_projects/pylitproject/.tox/lint/bin/python -m pip freeze
+entrypoints==0.3
+flake8==3.7.9
+mccabe==0.6.1
+pycodestyle==2.5.0
+pyflakes==2.1.1

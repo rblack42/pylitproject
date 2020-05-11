@@ -29,3 +29,10 @@ docs:
 	source _venv/bin/activate && \
 	cd rst && \
 	sphinx-build -b html -d _build/doctrees . ../docs
+.PHONY: lint
+lint:
+	tox -e lint
+
+.PHONY: test
+test:
+	tox

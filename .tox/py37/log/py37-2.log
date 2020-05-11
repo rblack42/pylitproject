@@ -1,0 +1,15 @@
+action: py37, msg: installpkg
+cwd: /Users/rblack/_projects/pylitproject
+cmd: /Users/rblack/_projects/pylitproject/.tox/py37/bin/python -m pip install --exists-action w .tox/.tmp/package/1/pylitproject-0.0.0.zip
+Processing ./.tox/.tmp/package/1/pylitproject-0.0.0.zip
+    ERROR: Command errored out with exit status 1:
+     command: /Users/rblack/_projects/pylitproject/.tox/py37/bin/python -c 'import sys, setuptools, tokenize; sys.argv[0] = '"'"'/private/var/folders/t9/hc5s57h95tj3rsp4qvk61m8m0000gn/T/pip-req-build-v9ea31lq/setup.py'"'"'; __file__='"'"'/private/var/folders/t9/hc5s57h95tj3rsp4qvk61m8m0000gn/T/pip-req-build-v9ea31lq/setup.py'"'"';f=getattr(tokenize, '"'"'open'"'"', open)(__file__);code=f.read().replace('"'"'\r\n'"'"', '"'"'\n'"'"');f.close();exec(compile(code, __file__, '"'"'exec'"'"'))' egg_info --egg-base /private/var/folders/t9/hc5s57h95tj3rsp4qvk61m8m0000gn/T/pip-pip-egg-info-dkoahrqz
+         cwd: /private/var/folders/t9/hc5s57h95tj3rsp4qvk61m8m0000gn/T/pip-req-build-v9ea31lq/
+    Complete output (5 lines):
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+      File "/private/var/folders/t9/hc5s57h95tj3rsp4qvk61m8m0000gn/T/pip-req-build-v9ea31lq/setup.py", line 6, in <module>
+        import pylitproject.__about__ as about
+    ModuleNotFoundError: No module named 'pylitproject'
+    ----------------------------------------
+ERROR: Command errored out with exit status 1: python setup.py egg_info Check the logs for full command output.

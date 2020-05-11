@@ -1,0 +1,11 @@
+README.rst
+setup.cfg
+setup.py
+pylitproject/__about__.py
+pylitproject/__init__.py
+pylitproject/__main__.py
+pylitproject/__version__.py
+pylitproject.egg-info/PKG-INFO
+pylitproject.egg-info/SOURCES.txt
+pylitproject.egg-info/dependency_links.txt
+pylitproject.egg-info/top_level.txt

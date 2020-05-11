@@ -1,3 +1,10 @@
 wheel
+twine
+tox
+nose
+coverage
+flake8
+python-coveralls
 sphinx
 sphinx-rtd-theme
+

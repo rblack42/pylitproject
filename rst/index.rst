@@ -1,5 +1,5 @@
-rst-literate Documentation
-==========================
+pylitproject: Documentation
+===========================
 
 .. toctree::
    :maxdepth: 2
