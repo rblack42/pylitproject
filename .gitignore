@@ -14,4 +14,4 @@ pylitproject.egg-info/
 # Sphinx
 rst/_build
 
-
+.tox/
