@@ -9,7 +9,7 @@ Georg Brandl in 2008. I used these tools to process thousands of pages of
 lecture notes for Computer Science courses I taught at |ACC|_ in Austin Texas.
 
 Overall, I was mostly satisfied with the result. I hosted my lectures on a
-private server, freely available to anyone wishing to explore the courses, and
+virtual private server, freely available to anyone wishing to explore the courses, and
 even had a few students across the globe follow along in a course. I used several
 extensions developed by others and myself to enhance my notes. However, in the
 end, there was still something missing.
@@ -20,17 +20,17 @@ Lecture Notes
 My lectures always tell a story. They are not just a presentation of dry facts.
 I have always tried to take students on a journey of discovery. Along the way,
 I introduce them to the tools of their trade, to prepare then for whatever job
-wait for them. That means I present code examples that start off small and
+waits for them. That means I present code examples that start off small and
 build up to a complete final program.  I run these code examples as I discuss
-them in the notes. A single small program may go through several evolutions
-until it reaches an end point. If you think about it, a set of lectures
+them in the notes. A single small program may go through several evolutionary
+steps until it reaches an end point. If you think about it, a set of lectures
 presenting a single program from start to finish is the kind of documentation
 maintainers need. They are designed to take the reader on the journey of
 development, explaining everything along the way! In a classroom setting the
 "why" of the code is very important!
 
 
-How do I make all of that happen using Sphinx?
+How did I make all of that happen using Sphinx?
 
 The answer is a bit painful, I ended up maintaining many different versions of
 the example code and included those versions in the notes. For static display of these
@@ -49,7 +49,7 @@ which can maintain the history of an evolving project without much work on the
 users part. Why am I maintaining all of those intermediate versions of
 something when Git_ can do all of that?
 
-Unfortunately, getting Git_ and Sphinx_ to play nicely together is not easy. 
+Unfortunately, getting Git_ and Sphinx_ to play nicely together is not easy.
 
 In order to  retrieve old versions of my example code I need to run a **git
 checkout** command. Unfortunately, I need to do that as Sphinx_ is processing
@@ -58,10 +58,10 @@ all of the code in the local working copy to the version that existed when that
 code example was created. That just does not sound like a good idea!
 
 Instead I kept examples in a separate repository managed by custom extensions
-to Sphinx as it processed my lecture notes. That worked, but i had two
-repositories to manage, and including code from a different repository into the
-lecture notes was not a simple solution. I had to run back and forth between
-repositories to manage all of the notes. 
+to Sphinx as it processed my lecture notes. That worked, but now I had two
+repositories to manage for each course, and including code from a different
+repository into the lecture notes was not a simple solution. I had to run back
+and forth between repositories to manage all of the notes.
 
 Literate Programming
 ====================
@@ -103,10 +103,11 @@ code is largely missing.
     proper documentation by stating: "Read the code'!
 
 Using |LP| in my lecture notes seemed like something nice to do, but it has
-another problem. I am not explaining one large program, I am explaining
-versions of that program as it evolves, and the code changes along the way!
-Features are added, removed, and moved around.  That makes using the standard
-tools of |LP| inadequate for the task without some work.
+another problem. I am not explaining one large program, I am explaining several
+programs, and versions of those program as they evolve. All that code changes
+as i tell my story in a class!  Features are added, removed, and moved around.
+That makes using the standard tools of |LP| inadequate for the task without
+some work.
 
 Non-Linear Flow
 ***************
@@ -123,7 +124,7 @@ maybe even the mistakes made along the way. Really good documentation details
 the "why" of the code, not just the "what" of that code.
 
 The story to be told is a linear one, but the development of the code was
-definitely not linear! 
+definitely not linear!
 
 ..  note::
 
@@ -141,33 +142,41 @@ toward details later.
 In bottom-up they build small parts that are combined to build bigger constructs.
 Ultimately, you reach the top and the entire project is done.
 
-Yes, it is possible to combine both of these approaches and build in a hybrid way. 
- No matter how we evolve the documentation, ultimately we need to invoke a took to produce the required format, mostly html, or pdf in my case.
+Yes, it is possible to combine both of these approaches and build in a hybrid
+way.  No matter how we evolve the documentation, ultimately we need to invoke a
+tool to produce the required format, mostly html, or pdf in my case.
 
 Sphinx_ starts off by processing the files in the order indicated by the table
 of contents. However, later runs may skip files and process them in a somewhat
 random order. The output of the run is a collection of HTML pages, or a single
-file to be processed by LateX_ into a final PDF file. Where is my code going to
-live, and how do I extract it for running as processing happens?
+file to be processed by LateX_ into a final PDF file. I need to extract code
+along the way, as the story unfolds. I need a way to
+build versions of the code and run them, then modify that code for a later
+run. Sounds hard to manage, but this is exactly how developers move their
+projects through the development process.
 
 
 Don't Repeat Yourself!
 **********************
 
-Programmers are taught this "law" early in their careers. Usually that means factoring out common code into a function, but in the end we repeat ourselves all the time, and never give it a single thought.
+There is one more important observation I want o make here.
 
-When we process letcure notes with Sphinx_ or process source code files with a
-compiler, there is a lot of repeating going on!. 
+Programmers are taught not to repeat themselves (*DRY*) athis "law" usually means factoring out common code into a function, but in the end we repeat ourselves all the time, and never give it a single thought.
+
+When I process lecture notes with Sphinx_ or process source code files with a
+compiler, there is a lot of repeating going on!.
 
 Why?
 
 The reason is simple, we never save any intermediate results of earlier
-processing in a meaningful way. if we did that, we might avoid much of the work
+processing in a meaningful way. If we did that, we might avoid much of the work
 going on as we repeatedly build products! At least with processing my |RST|
 files, I have an idea for a better way, but that means ditching SPhinx_ and
 starting over:
 
-:
+Here is a quote I like:
+
+::
     ".. plan to throw one away; you will, anyhow."
 
     Fred Brooks | The Mythical Man-Month
@@ -175,7 +184,7 @@ starting over:
 That leads me to the current project. I want to build a tool that will produce
 high-quality documentation (or lecture notes) showing how code is developed,
 and show how to manage that code, test that code, and run that code along the
-way.
+way. I also want to apply the *DRY* principle as much as I can as this tool evolves.
 
 Sounds simple enough!
 

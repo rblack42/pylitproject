@@ -1,1 +1,2 @@
 ..	include::	/references.inc
+..	wordcount::

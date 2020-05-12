@@ -14,8 +14,8 @@
     <script src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="reStructuredText Documents" href="02-rst-documents.html" />
-    <link rel="prev" title="rst-literate Documentation" href="../index.html" />
+    <link rel="next" title="Starting a Python project" href="02-project-setup.html" />
+    <link rel="prev" title="pylitproject: Documentation" href="../index.html" />
    
   <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
   
@@ -34,12 +34,13 @@
             
   <div class="section" id="literate-programming-and-restructuredtext">
 <h1>Literate Programming and reStructuredText<a class="headerlink" href="#literate-programming-and-restructuredtext" title="Permalink to this headline">¶</a></h1>
+<p>Read time: 15.3 minutes (1526 words)</p>
 <p>I have been using <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/">reStructuredText</a> for almost since it was first released by David
 Goodger in 2003. I moved to Python <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> shortly after it was released by
 Georg Brandl in 2008. I used these tools to process thousands of pages of
 lecture notes for Computer Science courses I taught at <a class="reference external" href="https://www.austincc.edu/rblack">Austin Community College</a> in Austin Texas.</p>
 <p>Overall, I was mostly satisfied with the result. I hosted my lectures on a
-private server, freely available to anyone wishing to explore the courses, and
+virtual private server, freely available to anyone wishing to explore the courses, and
 even had a few students across the globe follow along in a course. I used several
 extensions developed by others and myself to enhance my notes. However, in the
 end, there was still something missing.</p>
@@ -48,15 +49,15 @@ end, there was still something missing.</p>
 <p>My lectures always tell a story. They are not just a presentation of dry facts.
 I have always tried to take students on a journey of discovery. Along the way,
 I introduce them to the tools of their trade, to prepare then for whatever job
-wait for them. That means I present code examples that start off small and
+waits for them. That means I present code examples that start off small and
 build up to a complete final program.  I run these code examples as I discuss
-them in the notes. A single small program may go through several evolutions
-until it reaches an end point. If you think about it, a set of lectures
+them in the notes. A single small program may go through several evolutionary
+steps until it reaches an end point. If you think about it, a set of lectures
 presenting a single program from start to finish is the kind of documentation
 maintainers need. They are designed to take the reader on the journey of
 development, explaining everything along the way! In a classroom setting the
 “why” of the code is very important!</p>
-<p>How do I make all of that happen using Sphinx?</p>
+<p>How did I make all of that happen using Sphinx?</p>
 <p>The answer is a bit painful, I ended up maintaining many different versions of
 the example code and included those versions in the notes. For static display of these
 examples, that is fine. I used a Sphinx extension to run those different
@@ -77,10 +78,10 @@ pages. Since the entire class is normally under <a class="reference external" hr
 all of the code in the local working copy to the version that existed when that
 code example was created. That just does not sound like a good idea!</p>
 <p>Instead I kept examples in a separate repository managed by custom extensions
-to Sphinx as it processed my lecture notes. That worked, but i had two
-repositories to manage, and including code from a different repository into the
-lecture notes was not a simple solution. I had to run back and forth between
-repositories to manage all of the notes.</p>
+to Sphinx as it processed my lecture notes. That worked, but now I had two
+repositories to manage for each course, and including code from a different
+repository into the lecture notes was not a simple solution. I had to run back
+and forth between repositories to manage all of the notes.</p>
 </div>
 <div class="section" id="literate-programming">
 <h3>Literate Programming<a class="headerlink" href="#literate-programming" title="Permalink to this headline">¶</a></h3>
@@ -117,10 +118,11 @@ code is largely missing.</p>
 proper documentation by stating: “Read the code’!</p>
 </div>
 <p>Using <em>Literate Programming</em> in my lecture notes seemed like something nice to do, but it has
-another problem. I am not explaining one large program, I am explaining
-versions of that program as it evolves, and the code changes along the way!
-Features are added, removed, and moved around.  That makes using the standard
-tools of <em>Literate Programming</em> inadequate for the task without some work.</p>
+another problem. I am not explaining one large program, I am explaining several
+programs, and versions of those program as they evolve. All that code changes
+as i tell my story in a class!  Features are added, removed, and moved around.
+That makes using the standard tools of <em>Literate Programming</em> inadequate for the task without
+some work.</p>
 </div>
 </div>
 <div class="section" id="non-linear-flow">
@@ -150,36 +152,40 @@ In top-down, they focus on the high level aspects of the project, and move
 toward details later.</p>
 <p>In bottom-up they build small parts that are combined to build bigger constructs.
 Ultimately, you reach the top and the entire project is done.</p>
-<dl class="simple">
-<dt>Yes, it is possible to combine both of these approaches and build in a hybrid way.</dt><dd><p>No matter how we evolve the documentation, ultimately we need to invoke a took to produce the required format, mostly html, or pdf in my case.</p>
-</dd>
-</dl>
+<p>Yes, it is possible to combine both of these approaches and build in a hybrid
+way.  No matter how we evolve the documentation, ultimately we need to invoke a
+tool to produce the required format, mostly html, or pdf in my case.</p>
 <p><a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> starts off by processing the files in the order indicated by the table
 of contents. However, later runs may skip files and process them in a somewhat
 random order. The output of the run is a collection of HTML pages, or a single
-file to be processed by <a class="reference external" href="https://www.latex-project.org/">LateX</a> into a final PDF file. Where is my code going to
-live, and how do I extract it for running as processing happens?</p>
+file to be processed by <a class="reference external" href="https://www.latex-project.org/">LateX</a> into a final PDF file. I need to extract code
+along the way, as the story unfolds. I need a way to
+build versions of the code and run them, then modify that code for a later
+run. Sounds hard to manage, but this is exactly how developers move their
+projects through the development process.</p>
 </div>
 <div class="section" id="don-t-repeat-yourself">
 <h2>Don’t Repeat Yourself!<a class="headerlink" href="#don-t-repeat-yourself" title="Permalink to this headline">¶</a></h2>
-<p>Programmers are taught this “law” early in their careers. Usually that means factoring out common code into a function, but in the end we repeat ourselves all the time, and never give it a single thought.</p>
-<p>When we process letcure notes with <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> or process source code files with a
+<p>There is one more important observation I want o make here.</p>
+<p>Programmers are taught not to repeat themselves (<em>DRY</em>) athis “law” usually means factoring out common code into a function, but in the end we repeat ourselves all the time, and never give it a single thought.</p>
+<p>When I process lecture notes with <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> or process source code files with a
 compiler, there is a lot of repeating going on!.</p>
 <p>Why?</p>
 <p>The reason is simple, we never save any intermediate results of earlier
-processing in a meaningful way. if we did that, we might avoid much of the work
+processing in a meaningful way. If we did that, we might avoid much of the work
 going on as we repeatedly build products! At least with processing my reStructuredText
 files, I have an idea for a better way, but that means ditching <a class="reference external" href="http://sphinx-doc.org/">SPhinx</a> and
 starting over:</p>
+<p>Here is a quote I like:</p>
 <dl>
-<dt>:</dt><dd><p>“.. plan to throw one away; you will, anyhow.”</p>
+<dt>::</dt><dd><p>“.. plan to throw one away; you will, anyhow.”</p>
 <p>Fred Brooks | The Mythical Man-Month</p>
 </dd>
 </dl>
 <p>That leads me to the current project. I want to build a tool that will produce
 high-quality documentation (or lecture notes) showing how code is developed,
 and show how to manage that code, test that code, and run that code along the
-way.</p>
+way. I also want to apply the <em>DRY</em> principle as much as I can as this tool evolves.</p>
 <p>Sounds simple enough!</p>
 <p>Let’s get started!</p>
 </div>
@@ -210,15 +216,17 @@ way.</p>
 <li class="toctree-l2"><a class="reference internal" href="#don-t-repeat-yourself">Don’t Repeat Yourself!</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="02-rst-documents.html">reStructuredText Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-project-setup.html">Starting a Python project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03-git-store.html">The Git Store</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04-rst-block-structure.html">reStructuredText Block Structure</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="../index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="../index.html" title="previous chapter">rst-literate Documentation</a></li>
-      <li>Next: <a href="02-rst-documents.html" title="next chapter">reStructuredText Documents</a></li>
+      <li>Previous: <a href="../index.html" title="previous chapter">pylitproject: Documentation</a></li>
+      <li>Next: <a href="02-project-setup.html" title="next chapter">Starting a Python project</a></li>
   </ul></li>
 </ul>
 </div>

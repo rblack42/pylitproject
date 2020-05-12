@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>reStructuredText Documents &#8212; rst-literate 0.0.1 documentation</title>
+    <title>Starting a Python project &#8212; rst-literate 0.0.1 documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -32,21 +32,11 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="restructuredtext-documents">
-<h1>reStructuredText Documents<a class="headerlink" href="#restructuredtext-documents" title="Permalink to this headline">¶</a></h1>
-<p>Read time: 8.6 minutes (855 words)</p>
-<p>My course notes are a collection of individual lectures, each a single <strong>.rst</strong>
-file. The course is organized in sections, which are managed together in a
-directory named after the section topic. At the root of the course repository,
-I place the <a class="reference external" href="http://sphinx-doc.org/">sphinx</a> configuration file and the top level <strong>index.rst</strong> file
-containing the table of contents for the complete course.</p>
-<p>Rather than listing every lecture file title in the table of contents, I use
-the <a class="reference external" href="http://sphinx-doc.org/">sphinx</a> <strong>glob</strong> feature that simply processes all files found in a
-subdirectory. To get those files in something other than alphabetical order, I
-name the lectures with leading two-digit numbers which indicate the lecture
-order, so the files end up being processed in the correct order.</p>
-<p>To get this project started, we need to build a piece of code that will do
-something similar.</p>
+  <div class="section" id="starting-a-python-project">
+<h1>Starting a Python project<a class="headerlink" href="#starting-a-python-project" title="Permalink to this headline">¶</a></h1>
+<p>Read time: 10.6 minutes (1059 words)</p>
+<p>Most students begin a project by writing code. That is definitely not how we
+start a significant project. We have some setup work to do first:</p>
 <p>But forst, we have to get this project started.</p>
 <div class="section" id="step-1-set-up-the-project">
 <h2>Step 1: Set up the project<a class="headerlink" href="#step-1-set-up-the-project" title="Permalink to this headline">¶</a></h2>
@@ -55,8 +45,8 @@ under <a class="reference external" href="https://git-scm.com/">Git</a> control.
 “master” copy in case our local development machine explodes! (Believe me, I
 have had major failures using some unnamed vendor machines!)</p>
 <p>Here is my start for this project:</p>
-<div class="section" id="project-setup">
-<h3>Project Setup<a class="headerlink" href="#project-setup" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="project-directory">
+<h3>Project Directory<a class="headerlink" href="#project-directory" title="Permalink to this headline">¶</a></h3>
 <p>First, we create a top-level directory for the project. I keep all active
 development projects under <strong>_projects</strong> in my home directory:</p>
 <blockquote>
@@ -65,7 +55,7 @@ $ mkdir pylitproject
 </pre></div>
 </div>
 </div></blockquote>
-<p>FOr the rest of the setup, we need to be working in this new directory;</p>
+<p>For the rest of the setup, we need to be working in this new directory;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> pylitproject
 </pre></div>
 </div>
@@ -92,6 +82,10 @@ files will be placed in a <strong>tests</strong> package directory:</p>
 $ touch tests/__init__.py
 </pre></div>
 </div>
+</div>
+</div>
+<div class="section" id="step-2-manage-with-git">
+<h2>Step 2: Manage with Git<a class="headerlink" href="#step-2-manage-with-git" title="Permalink to this headline">¶</a></h2>
 <p>Now, we can initialize the project so <a class="reference external" href="https://git-scm.com/">Git</a> can manage it, Make sure that this
 command is run in the top-level project directory:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git init
@@ -169,7 +163,10 @@ processed and unchanged.
 </pre></div>
 </div>
 </div>
-<p>Now, we can get the project on <a class="reference external" href="https://github.com/">github</a>. Assuming you have an account there,
+</div>
+<div class="section" id="step-3-create-a-github-repository">
+<h2>Step 3: Create a Github Repository<a class="headerlink" href="#step-3-create-a-github-repository" title="Permalink to this headline">¶</a></h2>
+<p>Now, we can get the project on <a class="reference external" href="https://github.com/">Github</a>. Assuming you have an account there,
 sign in and create a new empty repository with the project name. Once you get
 that done, return to your development machine and run a few final commands:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git remote add origin https://github.com/rblack42/rst_literate.git
@@ -207,9 +204,8 @@ readable tags later.</p>
 your project to <a class="reference external" href="https://github.com/">Github</a>. Leave it off after that.</p>
 </div>
 </div>
-</div>
-<div class="section" id="documentation-setup">
-<h2>Documentation Setup<a class="headerlink" href="#documentation-setup" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-4-add-documentation">
+<h2>Step 4: Add Documentation<a class="headerlink" href="#step-4-add-documentation" title="Permalink to this headline">¶</a></h2>
 <p>In order to use <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> to document this project, we need to do a bit more
 work.</p>
 <p>First, we need to add a configuration file to the <strong>rst</strong> directory:</p>
@@ -303,9 +299,22 @@ Indices and tables
 <p>Notice that I am using the <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> <strong>glob</strong> feature to include documentation
 files under an <strong>introduction</strong> subdirectory. (The file you are reading now is
 in that directory).</p>
+<p>Run <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> at lease once (using the <strong>makefile</strong> shown below), so you have web
+pages in the <strong>docs</strong> directory. Then, sign on to your <a class="reference external" href="https://github.com/">Github</a> account and go yo
+your project repository page. Under the <strong>settings</strong> menu item, scroll down
+until you see <em>Github Pages</em>. Change the <em>source</em> selection that says <strong>None</strong>
+to <em>Master branch/docs folder</em>. Finally, push your new web pages to <a class="reference external" href="https://github.com/">Github</a>
+using the three step <em>mantra</em> we showed earlier. You should see those pages in
+any web browser by navigating to a URL like this:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://rblack42.github.io/pylitproject">https://rblack42.github.io/pylitproject</a></p></li>
+</ul>
+</div></blockquote>
+<p>Again, use your own <a class="reference external" href="https://github.com/">Github</a> account name here.</p>
 </div>
-<div class="section" id="project-dependencies">
-<h2>Project Dependencies<a class="headerlink" href="#project-dependencies" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-5-project-dependencies">
+<h2>Step 5: Project Dependencies<a class="headerlink" href="#step-5-project-dependencies" title="Permalink to this headline">¶</a></h2>
 <p>Hardly any significant Python project is totally self-contained. Most projects “depend”
 on tools written by other developers. Those tools are loaded onto your system
 using <strong>pip</strong>. It is traditional to list all of these “dependencies” in a
@@ -326,9 +335,13 @@ using <strong>pip</strong>. It is traditional to list all of these “dependenci
 </div>
 </div>
 </div>
-<div class="section" id="project-makefile">
-<h2>Project Makefile<a class="headerlink" href="#project-makefile" title="Permalink to this headline">¶</a></h2>
-<p>We will be doing a lot of different tasks in our development work. The individual commands needed for each task can be hard to remember. Therefore, we will write down all of those commands in a project <strong>Makefile</strong>, and use <a class="reference external" href="https://www.gnu.org/software/make/">Make</a> to run them for us, using a simple, easy to remember command. See the Appendix for more on this file and the <a class="reference external" href="https://www.gnu.org/software/make/">Make</a> command):</p>
+<div class="section" id="step-6-project-makefile">
+<h2>Step 6: Project Makefile<a class="headerlink" href="#step-6-project-makefile" title="Permalink to this headline">¶</a></h2>
+<p>We will be doing a lot of different tasks in our development work. The
+individual commands needed for each task can be hard to remember. Therefore, we
+will write down all of those commands in a project <strong>Makefile</strong>, and use <a class="reference external" href="https://www.gnu.org/software/make/">Make</a>
+to run them for us, using a simple, easy to remember command. (See the Appendix
+for more on this file and the <a class="reference external" href="https://www.gnu.org/software/make/">Make</a> command):</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Makefile</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Makefile
@@ -373,6 +386,51 @@ test:
 </div>
 </div>
 </div>
+<div class="section" id="step-7-testing">
+<h2>Step 7: Testing!<a class="headerlink" href="#step-7-testing" title="Permalink to this headline">¶</a></h2>
+<p>As we write code, we will test things. We will be using <em>Test Driven
+Development</em> in this project, which means we will write some test code for any
+new feature we add, then write the code needed to make sure that test “passes”.
+We will use a <a class="reference external" href="https://www.gnu.org/software/make/">Make</a> command to run tests locally, but there is a neat way we
+can run tests on a variety of machines, all for free. We will use <a class="reference external" href="https://travis-ci.org/">Travis-CI</a>
+which will run our tests for us on a remote system set up as we wish every time
+we push changes on <a class="reference external" href="https://github.com/">Github</a>.</p>
+<p>To set this up, we need a control file in our project:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">.travis.yml</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span><span class="p">:</span> <span class="n">false</span>
+
+<span class="n">language</span><span class="p">:</span> <span class="n">python</span>
+<span class="n">python</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s2">&quot;3.7&quot;</span>
+
+<span class="n">addons</span><span class="p">:</span>
+    <span class="n">apt</span><span class="p">:</span>
+        <span class="n">Packages</span><span class="p">:</span>
+            <span class="o">-</span> <span class="n">git</span>
+
+<span class="c1"># command to install dependencies</span>
+<span class="n">install</span><span class="p">:</span>
+    <span class="o">-</span> <span class="s1">&#39;pip install coveralls&#39;</span>
+    <span class="o">-</span> <span class="s1">&#39;pip install -r requirements.txt&#39;</span>
+    <span class="o">-</span> <span class="s1">&#39;python setup.py install&#39;</span>
+
+<span class="n">script</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">tox</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+</div>
+<p>We will go over this file later.</p>
+<p>Once you have this file in place, sign in to <a class="reference external" href="https://travis-ci.org/">Travis-CI</a> (you can use your
+<a class="reference external" href="https://github.com/">Github</a> credentials to do this), and look for your project under the account
+settings menu item. You need to toggle testing on for this project in the list
+of repositories shown.  Once that is done, simply “push” changes to <a class="reference external" href="https://github.com/">Github</a> and
+<a class="reference external" href="https://travis-ci.org/">Travis-CI</a> will see those changes, ‘clone’ a fresh copy of your project into a
+new virtual machine, and run the tests you specified. If everything works, you
+will see the results in the badge we included on the <strong>REAdme.rst</strong> file. Check
+your project page on <a class="reference external" href="https://github.com/">Github</a> to see this.</p>
+<p>That is enough setup work for now, let’s start working on code!</p>
+</div>
 </div>
 
 
@@ -395,11 +453,14 @@ test:
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="01-concepts.html">Literate Programming and reStructuredText</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">reStructuredText Documents</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Starting a Python project</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#step-1-set-up-the-project">Step 1: Set up the project</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#documentation-setup">Documentation Setup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#project-dependencies">Project Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#project-makefile">Project Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-2-manage-with-git">Step 2: Manage with Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-3-create-a-github-repository">Step 3: Create a Github Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-4-add-documentation">Step 4: Add Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-5-project-dependencies">Step 5: Project Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-6-project-makefile">Step 6: Project Makefile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#step-7-testing">Step 7: Testing!</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="03-git-store.html">The Git Store</a></li>
@@ -445,7 +506,7 @@ test:
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
-      <a href="../_sources/introduction/02-rst-documents.rst.txt"
+      <a href="../_sources/introduction/02-project-setup.rst.txt"
           rel="nofollow">Page source</a>
     </div>
 

@@ -1,22 +1,10 @@
-reStructuredText Documents
-##########################
+Starting a Python project
+#########################
 
 ..  include::   /header.inc
 
-My course notes are a collection of individual lectures, each a single **.rst**
-file. The course is organized in sections, which are managed together in a
-directory named after the section topic. At the root of the course repository,
-I place the sphinx_ configuration file and the top level **index.rst** file
-containing the table of contents for the complete course.
-
-Rather than listing every lecture file title in the table of contents, I use
-the sphinx_ **glob** feature that simply processes all files found in a
-subdirectory. To get those files in something other than alphabetical order, I
-name the lectures with leading two-digit numbers which indicate the lecture
-order, so the files end up being processed in the correct order.
-
-To get this project started, we need to build a piece of code that will do
-something similar.
+Most students begin a project by writing code. That is definitely not how we
+start a significant project. We have some setup work to do first:
 
 But forst, we have to get this project started.
 
@@ -30,8 +18,8 @@ have had major failures using some unnamed vendor machines!)
 
 Here is my start for this project:
 
-Project Setup
-=============
+Project Directory
+=================
 
 First, we create a top-level directory for the project. I keep all active
 development projects under **_projects** in my home directory:
@@ -41,7 +29,7 @@ development projects under **_projects** in my home directory:
     $ cd _projects
     $ mkdir pylitproject
 
-FOr the rest of the setup, we need to be working in this new directory;
+For the rest of the setup, we need to be working in this new directory;
 
 ..  code-block:: bash
 
@@ -76,6 +64,9 @@ files will be placed in a **tests** package directory:
     $ mkdir -p tests
     $ touch tests/__init__.py
 
+Step 2: Manage with Git
+***********************
+
 Now, we can initialize the project so Git_ can manage it, Make sure that this
 command is run in the top-level project directory:
 
@@ -96,7 +87,10 @@ some information about the project. Here is a basic start on this file:
 ..  literalinclude::    ../../README.rst
    :caption:    README.rst
 
-Now, we can get the project on github_. Assuming you have an account there,
+Step 3: Create a Github Repository
+**********************************
+
+Now, we can get the project on Github_. Assuming you have an account there,
 sign in and create a new empty repository with the project name. Once you get
 that done, return to your development machine and run a few final commands:
 
@@ -141,8 +135,8 @@ Github_.
     The **-u** option is only added to this command the first time you push
     your project to Github_. Leave it off after that.
 
-Documentation Setup
-*******************
+Step 4: Add Documentation
+*************************
 
 In order to use Sphinx_ to document this project, we need to do a bit more
 work.
@@ -165,8 +159,20 @@ Notice that I am using the Sphinx_ **glob** feature to include documentation
 files under an **introduction** subdirectory. (The file you are reading now is
 in that directory).
 
-Project Dependencies
-********************
+Run Sphinx_ at lease once (using the **makefile** shown below), so you have web
+pages in the **docs** directory. Then, sign on to your Github_ account and go yo
+your project repository page. Under the **settings** menu item, scroll down
+until you see *Github Pages*. Change the *source* selection that says **None**
+to *Master branch/docs folder*. Finally, push your new web pages to Github_
+using the three step *mantra* we showed earlier. You should see those pages in
+any web browser by navigating to a URL like this:
+
+    * https://rblack42.github.io/pylitproject
+
+Again, use your own Github_ account name here.
+
+Step 5: Project Dependencies
+****************************
 
 Hardly any significant Python project is totally self-contained. Most projects "depend"
 on tools written by other developers. Those tools are loaded onto your system
@@ -176,12 +182,43 @@ using **pip**. It is traditional to list all of these "dependencies" in a
 ..  literalinclude::    ../../requirements.txt
     :caption: requirements.txt
 
-Project Makefile
-****************
+Step 6: Project Makefile
+*************************
 
-We will be doing a lot of different tasks in our development work. The individual commands needed for each task can be hard to remember. Therefore, we will write down all of those commands in a project **Makefile**, and use Make_ to run them for us, using a simple, easy to remember command. See the Appendix for more on this file and the Make_ command):
+We will be doing a lot of different tasks in our development work. The
+individual commands needed for each task can be hard to remember. Therefore, we
+will write down all of those commands in a project **Makefile**, and use Make_
+to run them for us, using a simple, easy to remember command. (See the Appendix
+for more on this file and the Make_ command):
 
 ..  literalinclude::    ../../Makefile
     :caption: Makefile
 
+Step 7: Testing!
+****************
 
+As we write code, we will test things. We will be using *Test Driven
+Development* in this project, which means we will write some test code for any
+new feature we add, then write the code needed to make sure that test "passes".
+We will use a Make_ command to run tests locally, but there is a neat way we
+can run tests on a variety of machines, all for free. We will use Travis-CI_
+which will run our tests for us on a remote system set up as we wish every time
+we push changes on Github_.
+
+To set this up, we need a control file in our project:
+
+..  literalinclude::    ../../.travis.yml
+    :caption: .travis.yml
+
+We will go over this file later.
+
+Once you have this file in place, sign in to Travis-CI_ (you can use your
+Github_ credentials to do this), and look for your project under the account
+settings menu item. You need to toggle testing on for this project in the list
+of repositories shown.  Once that is done, simply "push" changes to Github_ and
+Travis-CI_ will see those changes, 'clone' a fresh copy of your project into a
+new virtual machine, and run the tests you specified. If everything works, you
+will see the results in the badge we included on the **REAdme.rst** file. Check
+your project page on Github_ to see this.
+
+That is enough setup work for now, let's start working on code!

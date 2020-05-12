@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>The Git Store &#8212; rst-literate 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="reStructuredText Block Structure" href="04-rst-block-structure.html" />
+    <link rel="prev" title="Starting a Python project" href="02-project-setup.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="the-git-store">
+<h1>The Git Store<a class="headerlink" href="#the-git-store" title="Permalink to this headline">¶</a></h1>
+<p>Read time: 1.5 minutes (149 words)</p>
+<p><a class="reference external" href="https://git-scm.com/">Git</a> stores everything needed to manage a project in a hidden <strong>.git</strong> subdirectory in
+the root directory of your project. Normally, you never pay any attention to what is in that folder. However, we will be using a variant of the Git store for our literate programming work, so let’s look inside a bit deeper.</p>
+<div class="section" id="git-blobs">
+<h2>Git Blobs<a class="headerlink" href="#git-blobs" title="Permalink to this headline">¶</a></h2>
+<p>Any time <a class="reference external" href="https://git-scm.com/">Git</a> needs to store a version of a file, it runs that file’s content
+through a hash function to calculate a unique 40 character code for that
+content. <a class="reference external" href="https://git-scm.com/">Git</a> then breaks that hash code into twp parts: The first two
+characters name a subdirectory under <strong>.git/objects</strong>, and the remaining 38
+characters of the code become the file name for that content in the indicated
+subdirectory. The actual content is stored in a compressed file.</p>
+<p>Hers is example code that will generate the 40 character hash code for an input file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+
+<span class="n">BUF_SIZE</span> <span class="o">=</span> <span class="mi">65536</span>
+
+<span class="n">sha1</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">()</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">BUF_SIZE</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">sha1</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SHA1: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sha1</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Handling Indentation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">getIndentationCount</span><span class="p">(</span><span class="n">spaces</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">ch</span> <span class="ow">in</span> <span class="n">spaces</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ch</span> <span class="o">==</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">8</span> <span class="o">-</span> <span class="p">(</span><span class="n">count</span> <span class="o">%</span> <span class="mi">8</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">count</span>
+</pre></div>
+</div>
+<p>Checking for new indent of dedent</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">indent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getIndentationCount</span><span class="p">(</span><span class="n">spaces</span><span class="p">)</span>
+<span class="n">previous</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indents</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">indents</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">emitToken</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commonToken</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">NEWLINE</span><span class="p">,</span> <span class="n">newLine</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="n">indent</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">indent</span> <span class="o">==</span> <span class="n">previous</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">skip</span><span class="p">()</span>
+<span class="k">elif</span> <span class="n">indent</span> <span class="o">&gt;</span> <span class="n">previous</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">indents</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">indent</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">emitToken</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commonToken</span><span class="p">(</span><span class="n">LanguageParser</span><span class="o">.</span><span class="n">INDENT</span><span class="p">,</span> <span class="n">spaces</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">indents</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">indents</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">indent</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emitToken</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">createDedent</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indents</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">rst-literate</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="01-concepts.html">Literate Programming and reStructuredText</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02-project-setup.html">Starting a Python project</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The Git Store</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#git-blobs">Git Blobs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="04-rst-block-structure.html">reStructuredText Block Structure</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="02-project-setup.html" title="previous chapter">Starting a Python project</a></li>
+      <li>Next: <a href="04-rst-block-structure.html" title="next chapter">reStructuredText Block Structure</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Roie R. Black.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/introduction/03-git-store.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
