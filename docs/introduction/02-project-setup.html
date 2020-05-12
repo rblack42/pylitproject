@@ -37,7 +37,7 @@
 <p>Read time: 10.6 minutes (1059 words)</p>
 <p>Most students begin a project by writing code. That is definitely not how we
 start a significant project. We have some setup work to do first:</p>
-<p>But forst, we have to get this project started.</p>
+<p>But first, we have to get this project started.</p>
 <div class="section" id="step-1-set-up-the-project">
 <h2>Step 1: Set up the project<a class="headerlink" href="#step-1-set-up-the-project" title="Permalink to this headline">¶</a></h2>
 <p>Like all good projects, we need to create a home for the project, and get it
@@ -49,12 +49,13 @@ have had major failures using some unnamed vendor machines!)</p>
 <h3>Project Directory<a class="headerlink" href="#project-directory" title="Permalink to this headline">¶</a></h3>
 <p>First, we create a top-level directory for the project. I keep all active
 development projects under <strong>_projects</strong> in my home directory:</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> _projects
+<div class="highlight-default notranslate" id="this"><div class="highlight"><pre><span></span>This is a test block - ignore for now!
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> _projects
 $ mkdir pylitproject
 </pre></div>
 </div>
-</div></blockquote>
 <p>For the rest of the setup, we need to be working in this new directory;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> pylitproject
 </pre></div>
@@ -244,7 +245,9 @@ work.</p>
 <span class="c1"># extensions coming with Sphinx (named &#39;sphinx.ext.*&#39;) or your custom</span>
 <span class="c1"># ones.</span>
 <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;sphinx_numfig&#39;</span><span class="p">,</span>
         <span class="s1">&#39;sphinx_ext.wordcount&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;sphinx_ext.pylit&#39;</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1"># Add any paths that contain templates here, relative to this directory.</span>

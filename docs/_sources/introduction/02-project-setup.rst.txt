@@ -6,7 +6,7 @@ Starting a Python project
 Most students begin a project by writing code. That is definitely not how we
 start a significant project. We have some setup work to do first:
 
-But forst, we have to get this project started.
+But first, we have to get this project started.
 
 Step 1: Set up the project
 **************************
@@ -24,7 +24,14 @@ Project Directory
 First, we create a top-level directory for the project. I keep all active
 development projects under **_projects** in my home directory:
 
-   ..  code-block:: bash
+..  _this:
+
+..  pylit:: bash
+
+
+    This is a test block - ignore for now!
+
+..  code-block:: bash
 
     $ cd _projects
     $ mkdir pylitproject

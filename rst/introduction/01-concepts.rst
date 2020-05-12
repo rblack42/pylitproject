@@ -161,7 +161,9 @@ Don't Repeat Yourself!
 
 There is one more important observation I want o make here.
 
-Programmers are taught not to repeat themselves (*DRY*) athis "law" usually means factoring out common code into a function, but in the end we repeat ourselves all the time, and never give it a single thought.
+Programmers are taught not to repeat themselves (*DRY*) athis "law" usually
+means factoring out common code into a function, but in the end we repeat
+ourselves all the time, and never give it a single thought.
 
 When I process lecture notes with Sphinx_ or process source code files with a
 compiler, there is a lot of repeating going on!.
