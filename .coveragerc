@@ -1,0 +1,7 @@
+# .coveragerc - controls coverage tests
+[run]
+branch = False
+omit = _venv/*
+
+[report]
+show_missing = False

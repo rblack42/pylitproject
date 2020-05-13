@@ -1,0 +1,16 @@
+graft docs
+graft pylitproject
+graft tests
+
+include .travis.yml
+include .coveragerc
+
+include MANIFEST
+include Makefile
+include tox.ini
+include README.rst
+include *.txt
+include *.rst
+include *.in
+
+global-exclude *.py[co] __pycache__ _venv .DS_Store

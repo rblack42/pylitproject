@@ -107,11 +107,16 @@ out of our remote repository:</p>
 <span class="n">__pycache__</span>
 <span class="n">_venv</span><span class="o">/</span>
 <span class="o">*.</span><span class="n">py</span><span class="p">[</span><span class="n">cod</span><span class="p">]</span>
+
+<span class="c1"># PyPi</span>
+<span class="n">dist</span><span class="o">/</span>
+<span class="n">build</span><span class="o">/</span>
 <span class="n">pylitproject</span><span class="o">.</span><span class="n">egg</span><span class="o">-</span><span class="n">info</span><span class="o">/</span>
 
 <span class="c1"># Sphinx</span>
 <span class="n">rst</span><span class="o">/</span><span class="n">_build</span>
 
+<span class="c1"># Tox</span>
 <span class="o">.</span><span class="n">tox</span><span class="o">/</span>
 </pre></div>
 </div>
@@ -333,7 +338,7 @@ using <strong>pip</strong>. It is traditional to list all of these “dependenci
 <span class="n">python</span><span class="o">-</span><span class="n">coveralls</span>
 <span class="n">sphinx</span>
 <span class="n">sphinx</span><span class="o">-</span><span class="n">rtd</span><span class="o">-</span><span class="n">theme</span>
-
+<span class="n">sphinx_numfig</span>
 </pre></div>
 </div>
 </div>
@@ -347,44 +352,12 @@ to run them for us, using a simple, easy to remember command. (See the Appendix
 for more on this file and the <a class="reference external" href="https://www.gnu.org/software/make/">Make</a> command):</p>
 <div class="literal-block-wrapper docutils container" id="id6">
 <div class="code-block-caption"><span class="caption-text">Makefile</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Makefile
-PROJECT	:=	$(notdir $(PWD))
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># pylitproject Makefile
+PROJECT	:= $(notdir $(PWD))
+MK		:= mk
 
-.PHONY: all
-all:	## Run project application
-		python3 -m pylitproject
+-include $(MK)/os-detect.mk
 
-.PHONY: init
-init:	## Set up Python virtualenv
-	test -d _venv || \
-	python3 -m venv _venv &amp;&amp; \
-	source _venv/bin/activate &amp;&amp; \
-	pip install -U pip
-
-.PHONY: dirs
-dirs:	## Create project directories
-	mkdir -p $(PROJECT)
-	mkdir -p docs
-	mkdir -p rst/_static
-	touch docks/.nojekyll
-
-.PHONY: reqs
-reqs:	## install Python dependencies
-	source _venv/bin/activate &amp;&amp; \
-	pip install -r requirements.txt
-
-.PHONY: docs
-docs:
-	source _venv/bin/activate &amp;&amp; \
-	cd rst &amp;&amp; \
-	sphinx-build -b html -d _build/doctrees . ../docs
-.PHONY: lint
-lint:
-	tox -e lint
-
-.PHONY: test
-test:
-	tox
 </pre></div>
 </div>
 </div>

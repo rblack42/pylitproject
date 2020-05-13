@@ -1,5 +1,5 @@
-pylitproject: Literate Programming Using reStructuredText
-#########################################################
+pylitproject: (v0.0.3-dev)
+##########################
 :Author: Roie R. Black
 :Date: May 7, 2020
 :Email: roie.black@gmail.com
@@ -37,4 +37,6 @@ processed and unchanged.
 
 ..  |license| image:: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg
     :alt: BSD 3-Clause License
+
+
 

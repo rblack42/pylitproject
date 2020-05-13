@@ -7,4 +7,4 @@ flake8
 python-coveralls
 sphinx
 sphinx-rtd-theme
-
+sphinx_numfig

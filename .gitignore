@@ -9,9 +9,14 @@
 __pycache__
 _venv/
 *.py[cod]
+
+# PyPi
+dist/
+build/
 pylitproject.egg-info/
 
 # Sphinx
 rst/_build
 
+# Tox
 .tox/

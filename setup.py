@@ -14,12 +14,19 @@ setup (
     author = about.__author__,
     author_email = about.__email__,
     url = about.__url__,
-    varsion = version.__version__,
+    version = version.__version__,
     description = about.__summary__,
+    description_content_type = 'text/x-rst',
     long_description = long_description,
+    long_description_content_type = 'text/x-rst',
     license = about.__license__,
     install_requires = [],
-    packages = find_packages(exclude=['docs', 'tests', 'rst']),
+    entry_points = {
+        'console_scripts': [
+            'pylit=pyitproject.__main__:main',
+        ]
+    },
+    packages = find_packages(exclude=['docs', 'tests', 'rst', '_venv']),
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'License :: OSI Approved :: BSD License',
