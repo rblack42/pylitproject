@@ -8,6 +8,7 @@ pylitproject: Documentation
 
    introduction/*
 
+   development-tasks
 
 Indices and tables
 ==================

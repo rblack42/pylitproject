@@ -34,7 +34,7 @@
             
   <div class="section" id="starting-a-python-project">
 <h1>Starting a Python project<a class="headerlink" href="#starting-a-python-project" title="Permalink to this headline">¶</a></h1>
-<p>Read time: 10.6 minutes (1059 words)</p>
+<p>Read time: 10.7 minutes (1069 words)</p>
 <p>Most students begin a project by writing code. That is definitely not how we
 start a significant project. We have some setup work to do first:</p>
 <p>But first, we have to get this project started.</p>
@@ -49,12 +49,22 @@ have had major failures using some unnamed vendor machines!)</p>
 <h3>Project Directory<a class="headerlink" href="#project-directory" title="Permalink to this headline">¶</a></h3>
 <p>First, we create a top-level directory for the project. I keep all active
 development projects under <strong>_projects</strong> in my home directory:</p>
-<div class="highlight-default notranslate" id="this"><div class="highlight"><pre><span></span>This is a test block - ignore for now!
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Review Sphinx todo directive for hints on extracting pylit blocks</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">bash: cat msg</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>This is a <span class="nb">test</span> block - ignore <span class="k">for</span> now!
 </pre></div>
 </div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">Step1: create directories</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> _projects
 $ mkdir pylitproject
 </pre></div>
+</div>
 </div>
 <p>For the rest of the setup, we need to be working in this new directory;</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> pylitproject
@@ -94,8 +104,8 @@ command is run in the top-level project directory:</p>
 </div>
 <p>We need a <strong>.gitignore</strong> file in the top-level project directory to keep cruft
 out of our remote repository:</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">.gitignore</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">.gitignore</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Mac</span>
 <span class="o">.</span><span class="n">DS_Store</span>
 
@@ -124,10 +134,10 @@ out of our remote repository:</p>
 <p>If you are going to use <a class="reference external" href="https://github.com/">Github</a> as a home for your project, you need a
 top-level <strong>README.rst</strong> file, so visitors to the project on <a class="reference external" href="https://github.com/">GitHub</a> will see
 some information about the project. Here is a basic start on this file:</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">README.rst</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pylitproject: Literate Programming Using reStructuredText
-#########################################################
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">README.rst</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pylitproject: (v0.0.3-dev)
+##########################
 :Author: Roie R. Black
 :Date: May 7, 2020
 :Email: roie.black@gmail.com
@@ -165,6 +175,8 @@ processed and unchanged.
 
 ..  |license| image:: https://img.shields.io/badge/License-BSD%203--Clause-blue.svg
     :alt: BSD 3-Clause License
+
+
 
 </pre></div>
 </div>
@@ -215,8 +227,8 @@ your project to <a class="reference external" href="https://github.com/">Github<
 <p>In order to use <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> to document this project, we need to do a bit more
 work.</p>
 <p>First, we need to add a configuration file to the <strong>rst</strong> directory:</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">rst/conf.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">rst/conf.py</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configuration file for the Sphinx documentation builder.</span>
 <span class="c1">#</span>
 <span class="c1"># This file only contains a selection of the most common options. For a full</span>
@@ -233,6 +245,8 @@ work.</p>
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
 
+<span class="c1"># Include todo list</span>
+<span class="n">todo_include_todos</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="c1"># -- Project information -----------------------------------------------------</span>
 
@@ -250,6 +264,7 @@ work.</p>
 <span class="c1"># extensions coming with Sphinx (named &#39;sphinx.ext.*&#39;) or your custom</span>
 <span class="c1"># ones.</span>
 <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;sphinx.ext.todo&#39;</span><span class="p">,</span>
         <span class="s1">&#39;sphinx_numfig&#39;</span><span class="p">,</span>
         <span class="s1">&#39;sphinx_ext.wordcount&#39;</span><span class="p">,</span>
         <span class="s1">&#39;sphinx_ext.pylit&#39;</span><span class="p">,</span>
@@ -282,8 +297,8 @@ work.</p>
 explained later.</p>
 <p>We also need a top-level reStructuredText page, named <strong>index.rst</strong> which will be the
 entry point to our documentation.</p>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">rst/index.rst</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">rst/index.rst</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pylitproject: Documentation
 ===========================
 
@@ -294,6 +309,7 @@ entry point to our documentation.</p>
 
    introduction/*
 
+   development-tasks
 
 Indices and tables
 ==================
@@ -327,8 +343,8 @@ any web browser by navigating to a URL like this:</p>
 on tools written by other developers. Those tools are loaded onto your system
 using <strong>pip</strong>. It is traditional to list all of these “dependencies” in a
 <strong>requirements.txt</strong> file in your project”</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">requirements.txt</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">requirements.txt</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wheel</span>
 <span class="n">twine</span>
 <span class="n">tox</span>
@@ -350,8 +366,8 @@ individual commands needed for each task can be hard to remember. Therefore, we
 will write down all of those commands in a project <strong>Makefile</strong>, and use <a class="reference external" href="https://www.gnu.org/software/make/">Make</a>
 to run them for us, using a simple, easy to remember command. (See the Appendix
 for more on this file and the <a class="reference external" href="https://www.gnu.org/software/make/">Make</a> command):</p>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">Makefile</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">Makefile</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span># pylitproject Makefile
 PROJECT	:= $(notdir $(PWD))
 MK		:= mk
@@ -372,8 +388,8 @@ can run tests on a variety of machines, all for free. We will use <a class="refe
 which will run our tests for us on a remote system set up as we wish every time
 we push changes on <a class="reference external" href="https://github.com/">Github</a>.</p>
 <p>To set this up, we need a control file in our project:</p>
-<div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text">.travis.yml</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">.travis.yml</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span><span class="p">:</span> <span class="n">false</span>
 
 <span class="n">language</span><span class="p">:</span> <span class="n">python</span>
@@ -441,6 +457,8 @@ your project page on <a class="reference external" href="https://github.com/">Gi
 </li>
 <li class="toctree-l1"><a class="reference internal" href="03-git-store.html">The Git Store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04-rst-block-structure.html">reStructuredText Block Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05-sphinx-lp-directive.html">Sphinx LP Directive</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development-tasks.html">Development Task List</a></li>
 </ul>
 
 <div class="relations">

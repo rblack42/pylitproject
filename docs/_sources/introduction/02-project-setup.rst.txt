@@ -24,14 +24,18 @@ Project Directory
 First, we create a top-level directory for the project. I keep all active
 development projects under **_projects** in my home directory:
 
-..  _this:
+..  todo::
+
+    Review Sphinx todo directive for hints on extracting pylit blocks
 
 ..  pylit:: bash
+    :caption: bash: cat msg
 
 
     This is a test block - ignore for now!
 
 ..  code-block:: bash
+    :caption: Step1: create directories
 
     $ cd _projects
     $ mkdir pylitproject
