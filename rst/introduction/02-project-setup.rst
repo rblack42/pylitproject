@@ -29,24 +29,24 @@ development projects under **_projects** in my home directory:
     Review Sphinx todo directive for hints on extracting pylit blocks
 
 ..  pylit:code:: bash
-    :caption: cat msg
+    :blkname: cat msg
 
 
     This is a test block - ignore for now!
 
 ..  pylit:shell:: bash
-    :caption: create directories
+    :blkname: create directories
 
     make dirs
 
 ..  pylit:add:: bash
-    :caption: cat msg
+    :blkname: cat msg
 
     More commands in script block
 
 
 ..  pylit:file::    python
-    :caption: test.py
+    :blkname: test.py
 
     # test.py
     def main():

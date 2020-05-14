@@ -16,6 +16,7 @@ from docutils.statemachine import StringList
 from sphinx.domains.std import StandardDomain
 from sphinx.util.docutils import SphinxDirective
 
+# Wrap Pylit block and block name in a container node
 def container_wrapper(directive: SphinxDirective, literal_node: Node, caption: str) -> nodes.container:  # NOQA
     container_node = nodes.container('', literal_block=True,
                                      classes=['literal-block-wrapper'])
@@ -37,12 +38,15 @@ def container_wrapper(directive: SphinxDirective, literal_node: Node, caption: s
         raise RuntimeError  # never reached
 
 class pylit_node(nodes.General, nodes.Element):
+    """General Pylit block node"""
     pass
 
-class pylitlist(nodes.General, nodes.Element):
+class pylit_block_list(nodes.General, nodes.Element):
+    """Manage a list of Pylit blocks"""
     pass
 
 class PylitBlock(SphinxDirective):
+    """Process a single Pylit Block"""
 
     node_class = pylit_node
     has_content = True
@@ -51,28 +55,28 @@ class PylitBlock(SphinxDirective):
     final_whitespace = False
     option_spec = {
             'linenos': directives.flag,
-            'caption': directives.unchanged_required,
+            'blkname': directives.unchanged_required,
     }
 
     def run(self) -> List[Node]:
-        env = self.state.document.settings.env
+        env = self.env
 
         language = self.arguments[0].lower()
         block_type = self.name.split(':')[1]
 
-        caption = self.options.get('caption')
-        if not caption:
-            caption = "unnamed block"
+        blkname = self.options.get('blkname')
+        if not blkname:
+            blkname = "unnamed block"
         if block_type == 'file':
-            caption = '<<%s>>==' % caption
+            blkname = '<<%s>>==' % blkname
         elif block_type == 'code':
-            caption = '<<%s>>==' % caption
+            blkname = '<<%s>>==' % blkname
         elif block_type == 'add':
-            caption = '<<%s>>+=' % caption
+            blkname = '<<%s>>+=' % blkname
         elif block_type == 'file':
-            caption = '<<file: %s>>==' % caption
+            blkname = '<<file: %s>>==' % blkname
         elif block_type == 'shell':
-            caption = '<<shell: %s>>==' % caption
+            blkname = '<<shell: %s>>==' % blkname
 
 
         code = '\n'.join(self.content)
@@ -82,13 +86,14 @@ class PylitBlock(SphinxDirective):
         else:
             literal['language'] = 'python'
         try:
-            literal = container_wrapper(self, literal, caption)
+            literal = container_wrapper(self, literal, blkname)
         except ValueError as exc:
             return [document.reporter.warning(exc, line = self.lineno)]
         self.add_name(literal)
         return [literal]
 
 class PylitDomain(StandardDomain):
+    """Create domain for pylit directives"""
     name = "pylit"
     label = "Pylit Block"
 
@@ -100,6 +105,7 @@ class PylitDomain(StandardDomain):
     }
 
 class PylitList(SphinxDirective):
+    """Manage a list of Pylit blocks"""
 
     has_content = False
     required_arguments = 0
@@ -109,6 +115,10 @@ class PylitList(SphinxDirective):
 
     def run(self) -> List[Node]:
         return [pylitlist('')]
+
+
+# Register directive components
+
 def setup(app: "Pylit") -> Dict[str, Any]:
     app.add_domain(PylitDomain)
 
